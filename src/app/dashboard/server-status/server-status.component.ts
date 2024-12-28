@@ -10,8 +10,10 @@ import { Component, effect, OnInit, signal } from '@angular/core';
 export class ServerStatusComponent implements OnInit{
   currentStatus = signal<'online' | 'offline' | 'unknown'>('offline');
   constructor(){
+   
     effect(()=>{console.log(this.currentStatus())})  //signal effect is used to set subscription on signal change.
   }
+  
   ngOnInit(){
     console.log("NG ONINIT")
     const interval=setInterval(()=>{

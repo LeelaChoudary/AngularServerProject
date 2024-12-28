@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 import { ButtonComponent } from "../../../shared/button/button.component";
 import { ControlComponent } from "../../../shared/control/control.component";
 import { FormsModule } from '@angular/forms';
@@ -10,13 +10,16 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './new-ticket.component.css'
 })
 export class NewTicketComponent {
+  @Output() addTicket=new EventEmitter<{title:string,text:string}>();
   @ViewChild('form') form?:ElementRef<HTMLFormElement>;
   // onClick(title:HTMLInputElement,textInput:HTMLTextAreaElement,form:HTMLFormElement){
     onClick(title:string,textInput:string){
+
     const enteredTitle=title;
     const enteredText=textInput;
     console.log(enteredTitle)
     console.log(enteredText)
+    this.addTicket.emit({title:title,text:textInput});
     // form.reset();     we can use like this to reset form after submit.But alternate way to access #form in comp class is by using VIEWCHILD
   this.form?.nativeElement.reset();
   }

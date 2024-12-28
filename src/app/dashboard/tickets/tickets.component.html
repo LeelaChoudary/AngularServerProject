@@ -1,4 +1,14 @@
-
+<div>
+    <ul>
+        @for(item of tickets;track item.id){
+            <li> <app-ticket [ticketObj]="item" (close)="onTicketClose(item.id)"/></li>
+        } 
+        <!-- empty is used to put fallback content if the array is empty -->
+        @empty {   
+      <p>No ticket is Available</p>
+        }
+    </ul>
+</div>
     <div id="new-ticket">
-    <app-new-ticket></app-new-ticket>
+    <app-new-ticket (addTicket)="addEachTicket($event)"></app-new-ticket>
     </div>
